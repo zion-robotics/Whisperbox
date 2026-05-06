@@ -69,12 +69,12 @@ export default function Chat() {
         </div>
         <div className="px-4 py-3 shrink-0" style={{ borderTop: '1px solid var(--border)' }}>
           <button onClick={handleLogout}
-            className="flex items-center gap-2 text-sm w-full px-3 py-2 rounded-lg transition-colors"
-            style={{ color: 'var(--text-muted)' }}
+            className="flex items-center gap-2 w-full rounded-lg transition-colors"
+            style={{ color: 'var(--text-muted)', fontSize: '14px', padding: '11px 14px' }}
             onMouseEnter={e => { e.currentTarget.style.color = 'var(--red)'; e.currentTarget.style.background = 'var(--red-dim)'; }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
           >
-            <LogOut size={15} /> Sign out
+            <LogOut size={18} /> Sign out
           </button>
         </div>
       </div>

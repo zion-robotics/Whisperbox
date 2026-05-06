@@ -105,7 +105,6 @@ export default function ConversationList({ selectedUserId, onSelectUser, onlineU
             <p className="text-xs font-medium truncate" style={{ color: 'var(--text-primary)' }}>{user?.display_name}</p>
             <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>@{user?.username}</p>
           </div>
-          <div className="w-2 h-2 rounded-full shrink-0" style={{ background: 'var(--green)' }} />
         </div>
       </div>
 
@@ -129,8 +128,8 @@ export default function ConversationList({ selectedUserId, onSelectUser, onlineU
                   onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Search users..."
                   autoFocus
-                  className="w-full pl-8 pr-3 py-2 rounded-lg text-sm"
-                  style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}
+                  className="w-full pr-3 py-2 rounded-lg text-sm"
+                  style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--text-primary)', paddingLeft: '36px' }}
                 />
               </div>
 
