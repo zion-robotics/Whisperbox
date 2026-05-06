@@ -11,49 +11,77 @@ export default function MessageBubble({ message, isSentByMe }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9, y: 8 }}
+      initial={{ opacity: 0, scale: 0.92, y: 10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
-      className={`flex ${isSentByMe ? 'justify-end' : 'justify-start'} mb-3`}
-      style={{ paddingLeft: isSentByMe ? '48px' : '0', paddingRight: isSentByMe ? '0' : '48px' }}
+      transition={{ duration: 0.22, ease: [0.34, 1.56, 0.64, 1] }}
+      className="flex w-full mb-2"
+      style={{ justifyContent: isSentByMe ? 'flex-end' : 'flex-start' }}
     >
-      <div className={`flex flex-col ${isSentByMe ? 'items-end' : 'items-start'}`}
-        style={{ maxWidth: '70%', minWidth: 0 }}>
+      {/* Spacer on sent side */}
+      {isSentByMe && <div style={{ flex: '0 0 64px' }} />}
+
+      <div
+        className="flex flex-col"
+        style={{
+          maxWidth: '65%',
+          alignItems: isSentByMe ? 'flex-end' : 'flex-start',
+        }}
+      >
+        {/* Bubble */}
         <div
-          className="px-3.5 py-2.5 rounded-2xl"
           style={{
-            background: isSentByMe ? 'var(--msg-sent)' : 'var(--msg-recv)',
+            background: isSentByMe
+              ? 'linear-gradient(135deg, #0d2d5e, #0f3470)'
+              : 'var(--bg-card)',
             border: isSentByMe
-              ? '1px solid rgba(0,212,255,0.15)'
-              : '1px solid var(--border)',
-            borderBottomRightRadius: isSentByMe ? '4px' : '16px',
-            borderBottomLeftRadius: isSentByMe ? '16px' : '4px',
+              ? '1px solid rgba(0,212,255,0.18)'
+              : '1px solid var(--border-light)',
+            borderRadius: isSentByMe
+              ? '18px 18px 4px 18px'
+              : '18px 18px 18px 4px',
+            padding: '10px 14px',
             wordBreak: 'break-word',
             overflowWrap: 'anywhere',
+            boxShadow: isSentByMe
+              ? '0 2px 8px rgba(0,0,0,0.3)'
+              : '0 1px 4px rgba(0,0,0,0.2)',
           }}
         >
           {decryptionFailed ? (
             <div className="flex items-center gap-1.5">
-              <AlertTriangle size={13} style={{ color: 'var(--red)' }} />
+              <AlertTriangle size={13} style={{ color: 'var(--red)', flexShrink: 0 }} />
               <span className="text-sm italic" style={{ color: 'var(--text-muted)' }}>
                 [Unable to decrypt]
               </span>
             </div>
           ) : (
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: 'var(--text-primary)', margin: 0 }}
+            >
               {text}
             </p>
           )}
         </div>
 
-        {/* Time + lock */}
-        <div className={`flex items-center gap-1 mt-1 px-1 ${isSentByMe ? 'flex-row-reverse' : 'flex-row'}`}>
-          <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+        {/* Timestamp + lock */}
+        <div
+          className="flex items-center gap-1 mt-1"
+          style={{
+            flexDirection: isSentByMe ? 'row-reverse' : 'row',
+            paddingLeft: isSentByMe ? 0 : '4px',
+            paddingRight: isSentByMe ? '4px' : 0,
+          }}
+        >
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
             {formatTime(created_at)}
           </span>
-          <Lock size={9} style={{ color: 'var(--text-muted)', opacity: 0.5 }} />
+          <Lock size={9} style={{ color: 'var(--accent)', opacity: 0.5 }} />
         </div>
       </div>
+
+      {/* Spacer on received side */}
+      {!isSentByMe && <div style={{ flex: '0 0 64px' }} />}
     </motion.div>
   );
 }
